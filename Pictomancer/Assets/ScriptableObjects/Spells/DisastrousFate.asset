@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b519972a320253445b2f43cddbe8ce0d, type: 3}
+  m_Name: DisastrousFate
+  m_EditorClassIdentifier: 
+  _brozi: Failure Management
+  _prefab: {fileID: 2698115707185904897, guid: 2c7953970e6e3b542b43b4151eccc2b4, type: 3}
+  _form: {fileID: 0}
+  _element: {fileID: 0}

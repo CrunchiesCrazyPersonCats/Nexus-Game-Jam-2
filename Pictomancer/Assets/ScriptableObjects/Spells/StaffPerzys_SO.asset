@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b519972a320253445b2f43cddbe8ce0d, type: 3}
+  m_Name: StaffPerzys_SO
+  m_EditorClassIdentifier: 
+  _brozi: "Perzys t\u0101em\u012Btsos"
+  _prefab: {fileID: 2506435159268898009, guid: 1fbe85bee00c2f745b01c9d0c115df23, type: 3}
+  _form: {fileID: 11400000, guid: 44fdd168a3395fb44a511be46e2f2b0b, type: 2}
+  _element: {fileID: 11400000, guid: ee3a6fb4e365b674694badb83aed72fb, type: 2}
