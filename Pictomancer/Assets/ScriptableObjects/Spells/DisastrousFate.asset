@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brozi: Failure Management
   _prefab: {fileID: 2698115707185904897, guid: 2c7953970e6e3b542b43b4151eccc2b4, type: 3}
+  _itemIcon: {fileID: 21300000, guid: f763d75478b892e489dafbb2adb149ed, type: 3}
   _form: {fileID: 0}
   _element: {fileID: 0}

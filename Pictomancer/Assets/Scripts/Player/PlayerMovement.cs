@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         Vector3 dir = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f), 1f);
-        Debug.Log(dir);
         transform.position += dir * speed * Time.deltaTime;
     }
 }

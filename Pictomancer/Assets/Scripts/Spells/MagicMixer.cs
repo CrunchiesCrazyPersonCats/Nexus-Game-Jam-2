@@ -92,4 +92,45 @@ public class MagicMixer : MonoBehaviour
         _spell = Instantiate(failureManagement, spellAnchor).GetComponent<Spell>();
     }
     #endregion
+
+    #region Interactions
+    public IObject GrabSpell()
+    {
+        if (_spell != null)
+        {
+            SpellObject_SO so = _spell.GetSpellObject();
+            Destroy(_spell.gameObject);
+            return so;
+        } else
+        {
+            return null;
+        }
+    }
+
+    public IObject GrabFormObject()
+    {
+        if (_form == null || _mixing)
+        {
+            return null;
+        } else
+        {
+            FormObject_SO so = _form.GetFormObject();
+            RemoveForm();
+            return so;
+        }
+    }
+
+    public IObject GrabElementObject()
+    {
+        if (_element == null || _mixing)
+        {
+            return null;
+        } else
+        {
+            ElementObject_SO so = _element.GetElementObject();
+            RemoveElement();
+            return so;
+        }
+    }
+    #endregion
 }
