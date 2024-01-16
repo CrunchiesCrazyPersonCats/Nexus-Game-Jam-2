@@ -4,18 +4,11 @@ using UnityEngine;
 
 namespace Pictomancer.Element
 {
-
-    public enum Elements
-    {
-        Suvion,
-        Perzys
-    }
-
     public class ElementDetection : MonoBehaviour
     {
         public int MaxPoint = 0;
 
-        public Elements ThisElements;
+        public SpellObject_SO ThisSpell;
         private int _pointcompleted;
         public int PointCompleted
         {
@@ -28,8 +21,7 @@ namespace Pictomancer.Element
                 _pointcompleted = value;
                 if (_pointcompleted == MaxPoint)
                 {
-                    Debug.Log(ThisElements.ToString());
-                    // Unlocked element
+                    Debug.Log(ThisSpell._element._brozi);
                 }
             }
         }

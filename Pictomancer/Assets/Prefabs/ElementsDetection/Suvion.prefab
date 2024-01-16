@@ -48,11 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7428185613791885236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4f5c95965284924095280a6588f8219, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dc01cad085bbfc45a265c563ba5d915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaxPoint: 0
-  ThisElements: 0
+  ThisSpell: {fileID: 11400000, guid: 6b8b0940760e5fe4f9b1c8fad5c68fd4, type: 2}
 --- !u!1001 &3009342716880497028
 PrefabInstance:
   m_ObjectHideFlags: 0

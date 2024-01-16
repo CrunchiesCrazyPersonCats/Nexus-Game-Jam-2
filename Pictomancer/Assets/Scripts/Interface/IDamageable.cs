@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Interface
+namespace Pictomancer.Interface
 {
-    public class IDamageable
+    public interface IDamageable
     {
+        public int Health { get; set; }
+        public void Damage(int amount);
     }
 }
