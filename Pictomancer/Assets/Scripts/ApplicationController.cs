@@ -3,58 +3,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class ApplicationController : MonoBehaviour
+namespace Pictomancer
 {
-    public enum GameCondition
-    {
-        Start,
-        OnGoing,
-        Won,
-        Lost
-    }
 
-    public static ApplicationController Instance { get; private set; }
-    public GameCondition gameCondition { get; private set; }
-
-    void Awake()
+    public class ApplicationController : MonoBehaviour
     {
-        if (Instance)
+        public enum GameCondition
         {
-            Destroy(this);
+            Start,
+            OnGoing,
+            Won,
+            Lost
         }
-        else
+
+        public static ApplicationController Instance { get; private set; }
+        public GameCondition gameCondition { get; private set; }
+
+        void Awake()
         {
-            Instance = this;
+            if (Instance)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
         }
-    }
 
-    void Start()
-    {
-        // Application settings
-        Application.wantsToQuit += OnWantToQuit;
-        SceneManager.activeSceneChanged += OnSwitchScene;
-        Application.targetFrameRate = 120;
-        DontDestroyOnLoad(gameObject);
+        void Start()
+        {
+            // Application settings
+            Application.wantsToQuit += OnWantToQuit;
+            SceneManager.activeSceneChanged += OnSwitchScene;
+            Application.targetFrameRate = 120;
+            DontDestroyOnLoad(gameObject);
 
-        // Start
-        gameCondition = GameCondition.Start;
-        SceneManager.LoadScene(Constants.HOMEPAGE_SCENE);
-    }
+            // Start
+            gameCondition = GameCondition.Start;
+            SceneManager.LoadScene(Constants.HOMEPAGE_SCENE);
+        }
 
-    #region ApplicationReactions
-    private bool OnWantToQuit()
-    {
-        #if UNITY_EDITOR
+        #region ApplicationReactions
+        private bool OnWantToQuit()
+        {
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#else
             Application.Quit();
-        #endif
-        return true;
+#endif
+            return true;
+        }
+
+        private void OnSwitchScene(Scene current, Scene next)
+        {
+        }
+        #endregion
     }
 
-    private void OnSwitchScene(Scene current, Scene next)
-    {
-    }
-    #endregion
 }
