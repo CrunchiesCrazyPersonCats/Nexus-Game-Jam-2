@@ -17,3 +17,4 @@ MonoBehaviour:
   _itemIcon: {fileID: 21300000, guid: d4412cf95e809d043b475004d884de9d, type: 3}
   _form: {fileID: 11400000, guid: 44fdd168a3395fb44a511be46e2f2b0b, type: 2}
   _element: {fileID: 11400000, guid: ee3a6fb4e365b674694badb83aed72fb, type: 2}
+  _duration: 10
