@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpellElements
   - MagicQuill
+  - Barrier
   layers:
   - Default
   - TransparentFX

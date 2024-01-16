@@ -18,10 +18,11 @@ namespace Pictomancer.Enemies
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             _spriteRenderer.color = _element._color;
-            Health = MaxHealth;
+            
             _body.velocity = Vector3.right * MoveSpeed;
             Destroy(gameObject, _lifeSpawn);
         }
