@@ -5,7 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Pictomancer.Element
+namespace Pictomancer.Elements
 {
     public class MouseDrawing : MonoBehaviour
     {

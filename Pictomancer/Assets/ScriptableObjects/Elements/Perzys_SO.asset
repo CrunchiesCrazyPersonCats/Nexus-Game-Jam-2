@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Perzys_SO
   m_EditorClassIdentifier: 
   _brozi: Perzys
+  ElementType: 0
   _prefab: {fileID: 865140929604087998, guid: 44b5fb07504b2104391372ea8fff6e4e, type: 3}
+  _itemIcon: {fileID: 0}
+  _color: {r: 1, g: 0.13477108, b: 0, a: 1}

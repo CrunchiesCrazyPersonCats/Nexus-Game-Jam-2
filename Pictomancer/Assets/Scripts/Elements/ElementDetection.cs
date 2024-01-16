@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pictomancer.Element
+namespace Pictomancer.Elements
 {
     public class ElementDetection : MonoBehaviour
     {

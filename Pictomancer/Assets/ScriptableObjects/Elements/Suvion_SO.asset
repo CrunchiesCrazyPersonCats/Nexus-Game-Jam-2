@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Suvion_SO
   m_EditorClassIdentifier: 
   _brozi: Suvion
+  ElementType: 1
   _prefab: {fileID: 7454098249492011052, guid: d97a657a2119b834f96fa551be4b9090, type: 3}
+  _itemIcon: {fileID: 0}
+  _color: {r: 0, g: 0.6813383, b: 1, a: 1}

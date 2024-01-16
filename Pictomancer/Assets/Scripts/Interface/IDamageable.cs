@@ -8,7 +8,10 @@ namespace Pictomancer.Interface
 {
     public interface IDamageable
     {
+        public ElementObject_SO Element { get; set; }
         public int Health { get; set; }
-        public void Damage(int amount);
+        public int MaxHealth { get; set; }
+        public void TakeDamage(int amount, ElementType source);
+        public void Death();
     }
 }
