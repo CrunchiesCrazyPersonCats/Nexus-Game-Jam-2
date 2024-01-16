@@ -10,12 +10,14 @@ public class Colmeil : MonoBehaviour
     bool _sorcering = false;
     SpellObject_SO _currentSpell = null;
     float _currentTimer = 0f;
+    
+    [Header("Enemies")]
+    List<GameObject> _enemies = new List<GameObject>();
 
     [Header("UI")]
     public GameObject spellUI;
     public Image spellIcon;
     public TMP_Text spellText;
-
 
     private void Start()
     {
@@ -35,6 +37,10 @@ public class Colmeil : MonoBehaviour
         } else
         {
             UpdateSorceringTimer(Time.deltaTime);
+            if (_enemies.Count > 0)
+            {
+                AttackClosestEnemies();
+            }
         }
     }
 
@@ -59,6 +65,31 @@ public class Colmeil : MonoBehaviour
             _currentSpell = null;
             spellUI.SetActive(false);
         }
+    }
+    #endregion
+
+    #region "Murdering People, hum enemies"
+    void AttackClosestEnemies()
+    {
+        GameObject enemy = GetClosestEnemies();
+
+        // Attack Enemy
+    }
+    GameObject GetClosestEnemies()
+    {
+        GameObject closest = _enemies[0];
+        float distance = Vector3.Distance(transform.position, closest.transform.position);
+
+        foreach (GameObject enemy in _enemies)
+        {
+            float t = Vector3.Distance(transform.position, enemy.transform.position);
+            if (t < distance)
+            {
+                closest = enemy;
+                distance = t;
+            }
+        }
+        return closest;
     }
     #endregion
 }

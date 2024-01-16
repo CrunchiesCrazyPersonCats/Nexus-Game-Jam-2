@@ -56,5 +56,5 @@ public class Player : MonoBehaviour
         _carriedItem = null;
         itemImage.enabled = false;
     }
-    #endregion
+    #endregion 
 }
