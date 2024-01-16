@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     }
 
     #region Inventory
+    public bool IsCarrying() { return _carriedItem != null; }
     public bool SetItemCarried(IObject item)
     {
         if (item == null) Debug.Log("somethign is wrong here");
@@ -46,16 +47,14 @@ public class Player : MonoBehaviour
         }
         return false;
     }
-    public IObject GetItemCarried()
+    public IObject GetCarriedItem()
     {
-        if (_carriedItem != null)
-        {
-            itemImage.enabled = false;
-            return _carriedItem;
-        } else
-        {
-            return null;
-        }
+        return _carriedItem;
+    }
+    public void ConfirmRemovalCarriedItem()
+    {
+        _carriedItem = null;
+        itemImage.enabled = false;
     }
     #endregion
 }
