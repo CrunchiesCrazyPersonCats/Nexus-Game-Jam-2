@@ -10,4 +10,5 @@ public class SpellObject_SO : ScriptableObject, IObject
     public Sprite _itemIcon;
     public FormObject_SO _form;
     public ElementObject_SO _element;
+    public int _duration;
 }
