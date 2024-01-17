@@ -1,4 +1,5 @@
 using Pictomancer.Enemies;
+using Pictomancer.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -58,9 +59,17 @@ public class WaveManager : MonoBehaviour
 
     public void Spawn()
     {
-        GameObject go = Instantiate(EnemiesPrefab[Random.Range(0, _ennemyTypeCount)], _spawner[Random.Range(0, _spawnerCount)].position, Quaternion.identity);
-        EnnemiesList.Add(go.GetComponent<EnemieController>());
-        EnnemiesList.Last().WaveManagerRef = this;
+        Instantiate(EnemiesPrefab[Random.Range(0, _ennemyTypeCount)], _spawner[Random.Range(0, _spawnerCount)].position, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.LogWarning(EnnemiesList.Count);
+        if (collision.gameObject.TryGetComponent(out EnemieController obj))
+        {
+            EnnemiesList.Add(obj.GetComponent<EnemieController>());
+            EnnemiesList.Last().WaveManagerRef = this;
+        }
     }
 
 }

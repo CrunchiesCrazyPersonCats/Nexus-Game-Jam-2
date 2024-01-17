@@ -51,7 +51,7 @@ public class Colmeil : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _waveManager.EnnemiesList.Count > 0)
         {
             AttackClosestEnemies();
         }
@@ -84,40 +84,34 @@ public class Colmeil : MonoBehaviour
     #region "Murdering People, hum enemies"
     void AttackClosestEnemies()
     {
-        //GameObject enemy = GetClosestEnemies();
+        StartCoroutine(SpellAnimation());
+    }
 
+    IEnumerator SpellAnimation()
+    {
         EnemieController closest = _waveManager.EnnemiesList[0];
-        Invoke("HideSpellLine", _spellLingering);
-
-        _spellLine.endColor = SpellTest._element._color;
-        _spellLine.positionCount = 2;
-        _spellLine.SetPosition(1, closest.transform.position);
         //closest.TakeDamage(_currentSpell._attackDamage, _currentSpell._element.ElementType);
         closest.TakeDamage(SpellTest._attackDamage, SpellTest._element.ElementType);
 
-        // Attack Enemy
+        _spellLine.endColor = SpellTest._element._color;
+        _spellLine.positionCount = 2;
+        float timer = _spellLingering;
+        while (closest)
+        {
+            _spellLine.SetPosition(1, closest.transform.position);
+            yield return new WaitForFixedUpdate();
+            timer -= Time.fixedDeltaTime;
+            if (timer < 0f)
+            {
+                break;
+            }
+        }
+        HideSpellLine();
     }
 
     private void HideSpellLine()
     {
         _spellLine.positionCount = 1;
     }
-
-    /*GameObject GetClosestEnemies()
-    {
-        GameObject closest = _enemies[0];
-        float distance = Vector3.Distance(transform.position, closest.transform.position);
-
-        foreach (GameObject enemy in _enemies)
-        {
-            float t = Vector3.Distance(transform.position, enemy.transform.position);
-            if (t < distance)
-            {
-                closest = enemy;
-                distance = t;
-            }
-        }
-        return closest;
-    }*/
     #endregion
 }

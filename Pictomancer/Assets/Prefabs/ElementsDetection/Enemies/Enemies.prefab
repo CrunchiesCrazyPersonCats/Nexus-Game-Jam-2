@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _element: {fileID: 0}
-  _maxHealth: 4
+  _maxHealth: 10
   _attackDamage: 1
   MoveSpeed: 4
   _lifeSpawn: 5
