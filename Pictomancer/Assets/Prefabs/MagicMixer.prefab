@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101767521466093399}
   - component: {fileID: 101767521466093398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MagicMixer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101767521895222886}
   - component: {fileID: 101767521895222887}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 101767522630599518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ElementAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 101767523073902679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpellAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 101767523142930253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FormAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 101767523236995621}
   - component: {fileID: 101767523236995626}
   - component: {fileID: 101767523236995627}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

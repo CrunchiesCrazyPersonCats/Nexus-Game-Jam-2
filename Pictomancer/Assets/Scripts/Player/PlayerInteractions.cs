@@ -9,9 +9,11 @@ public class PlayerInteractions : MonoBehaviour
     public float interactDistance = 2f;
     List<KeyCode> keys = new List<KeyCode>();
     Vector2 lookDirection = Vector2.zero;
+    int mask;
 
     private void Awake()
     {
+        mask = LayerMask.GetMask(Constants.LAYER_INTERACTIBLE);
         _player = GetComponent<Player>();
         keys.Add(KeyCode.G); // Interact Key : Grab and Put
     }
@@ -39,7 +41,7 @@ public class PlayerInteractions : MonoBehaviour
             lookDirection.Normalize();
         }
 
-        return Physics2D.Raycast(transform.position, lookDirection, interactDistance);
+        return Physics2D.Raycast(transform.position, lookDirection, interactDistance, mask);
     }
 
     void HandleInteractions(KeyCode key, RaycastHit2D hit)
@@ -62,6 +64,7 @@ public class PlayerInteractions : MonoBehaviour
     #region GrabAndPick
     void GrabItem(RaycastHit2D hit)
     {
+        Debug.Log(hit);
         IObject obj = null;
         if (hit.transform.parent.TryGetComponent(out MagicMixer magicMixer))
         {

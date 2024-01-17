@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Pictomancer.Elements
 {
     public class MouseDrawing : MonoBehaviour
     {
+
         Coroutine drawing;
         [SerializeField] private GameObject LinePrefab;
         Camera cam;
         List<Vector2> edgePos = new List<Vector2>();
+        int _lmask;
+        List<ElementPointDetection> _pointList = new List<ElementPointDetection>();
+
 
         private void Start()
         {
+            _lmask = LayerMask.GetMask(Constants.LAYER_MAGIABOARD);
+
             cam = Camera.main;
         }
 
@@ -59,7 +62,12 @@ namespace Pictomancer.Elements
         void FinishLine()
         {
             StopCoroutine(drawing);
-            GameObject go = transform.GetChild(transform.childCount - 1).gameObject;
+            foreach (ElementPointDetection point in _pointList)
+            {
+                point.UpdateHitStatus();
+            }
+            _pointList.Clear();
+            /*GameObject go = transform.GetChild(transform.childCount - 1).gameObject;
             LineRenderer line = go.GetComponent<LineRenderer>();
             EdgeCollider2D edge = go.GetComponent<EdgeCollider2D>();
             for (int point = 0; point < line.positionCount; point++)
@@ -75,7 +83,7 @@ namespace Pictomancer.Elements
             {
                 Destroy(edge);
                 go.AddComponent<CircleCollider2D>().radius = 0.2f;
-            }
+            }*/
         }
 
         IEnumerator DrawLine()
@@ -83,22 +91,30 @@ namespace Pictomancer.Elements
             GameObject go = Instantiate(LinePrefab, transform);
             LineRenderer line = go.GetComponent<LineRenderer>();
             line.positionCount = 0;
-
+            Collider2D[] hits;
             while (true)
             {
                 Vector3 pos = cam.ScreenToWorldPoint(Input.mousePosition);
                 pos.z = 0;
-                if (line.positionCount > 3 && line.GetPosition(line.positionCount - 2) == pos)
+                hits = Physics2D.OverlapPointAll(pos, _lmask);
+                foreach (Collider2D hit in hits)
                 {
-                    //mwein mwein
-                }
-                else
-                {
-                    line.positionCount++;
-                    line.SetPosition(line.positionCount - 1, pos);
-                }
+                    if (hit.TryGetComponent(out ElementPointDetection point))
+                    {
+                        _pointList.Add(point);
+                    }
+                    if (line.positionCount > 3 && line.GetPosition(line.positionCount - 2) == pos)
+                    {
+                        //mwein mwein
+                    }
+                    else
+                    {
+                        line.positionCount++;
+                        line.SetPosition(line.positionCount - 1, pos);
+                    }
 
-                yield return new WaitForFixedUpdate();
+                }
+                 yield return new WaitForFixedUpdate();
             }
         }
     }

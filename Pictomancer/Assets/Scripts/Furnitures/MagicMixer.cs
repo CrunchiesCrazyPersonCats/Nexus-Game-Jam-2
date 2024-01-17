@@ -54,6 +54,7 @@ public class MagicMixer : MonoBehaviour
         _element = newElement.GetComponent<Element>();
         _mixing = _form && _element;
     }
+
     void RemoveElement()
     {
         if (_element != null)

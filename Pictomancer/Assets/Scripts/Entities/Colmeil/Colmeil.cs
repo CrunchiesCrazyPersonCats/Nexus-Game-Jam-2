@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Colmeil : MonoBehaviour
 {
@@ -13,9 +12,12 @@ public class Colmeil : MonoBehaviour
     SpellObject_SO _currentSpell = null;
     public SpellObject_SO SpellTest;
     float _currentTimer = 0f;
+    Coroutine Spelling;
 
     [SerializeField] private float _spellLingering;
     [SerializeField] private LineRenderer _spellLine;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _spellStartPoint;
 
     [Header("Enemies")]
     //List<GameObject> _enemies = new List<GameObject>();
@@ -26,9 +28,13 @@ public class Colmeil : MonoBehaviour
     public Image spellIcon;
     public TMP_Text spellText;
 
+
+    [SerializeField] float _reCastSpeed;
+    float _nextShot = 0.0f;
+
     private void Start()
     {
-        _spellLine.SetPosition(0, transform.position);
+        _spellLine.SetPosition(0, _spellStartPoint.position);
         spellUI.SetActive(false);
     }
 
@@ -45,16 +51,25 @@ public class Colmeil : MonoBehaviour
         } else
         {
             UpdateSorceringTimer(Time.deltaTime);
-            if (_waveManager.EnnemiesList.Count > 0)
+            if (_waveManager.EnnemiesList.Count > 0 && _nextShot + _reCastSpeed < Time.time)
             {
-                AttackClosestEnemies();
+                if (_animator)
+                {
+                    _animator.SetTrigger("Cast");
+                }
+                _nextShot = Time.time;
+                //AttackClosestEnemies();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _waveManager.EnnemiesList.Count > 0)
+        /*if (Input.GetKeyDown(KeyCode.Space) && _waveManager.EnnemiesList.Count > 0)
         {
-            AttackClosestEnemies();
-        }
+            if (_animator)
+            {
+                _animator.SetTrigger("Cast");
+            }
+            //AttackClosestEnemies();
+        }*/
     }
 
     #region "CastingSpells"
@@ -82,31 +97,54 @@ public class Colmeil : MonoBehaviour
     #endregion
 
     #region "Murdering People, hum enemies"
-    void AttackClosestEnemies()
+    public void AttackClosestEnemies()
     {
-        StartCoroutine(SpellAnimation());
+        if (Spelling != null)
+        {
+            HideSpellLine();
+            StopCoroutine(Spelling);
+        }
+        Spelling = StartCoroutine(SpellAnimation());
     }
 
     IEnumerator SpellAnimation()
     {
-        EnemieController closest = _waveManager.EnnemiesList[0];
-        //closest.TakeDamage(_currentSpell._attackDamage, _currentSpell._element.ElementType);
-        closest.TakeDamage(SpellTest._attackDamage, SpellTest._element.ElementType);
-
-        _spellLine.endColor = SpellTest._element._color;
-        _spellLine.positionCount = 2;
-        float timer = _spellLingering;
-        while (closest)
+        if (_waveManager.EnnemiesList.Count != 0)
         {
-            _spellLine.SetPosition(1, closest.transform.position);
-            yield return new WaitForFixedUpdate();
-            timer -= Time.fixedDeltaTime;
-            if (timer < 0f)
+            EnemieController closest = _waveManager.EnnemiesList[0];
+            StartCoroutine(ApplyDamage(closest));
+
+            float timer = _spellLingering;
+            _spellLine.endColor = _currentSpell._element._color;
+            _spellLine.positionCount = 2;
+            while (closest)
             {
-                break;
+                _spellLine.SetPosition(1, closest.transform.position);
+                yield return new WaitForFixedUpdate();
+                timer -= Time.fixedDeltaTime;
+                if (timer < 0f)
+                {
+                    break;
+                }
             }
+            HideSpellLine();
         }
-        HideSpellLine();
+        else
+        {
+            yield return null;
+        }
+    }
+
+    IEnumerator ApplyDamage(EnemieController closest)
+    {
+        int attack = _currentSpell._attackDamage;
+        ElementType elemType = _currentSpell._element.ElementType;
+        yield return new WaitForSeconds(_spellLingering);
+        if (closest != null)
+        {
+            closest.TakeDamage(attack, elemType);
+        }
+        //closest.TakeDamage(SpellTest._attackDamage, SpellTest._element.ElementType);
     }
 
     private void HideSpellLine()

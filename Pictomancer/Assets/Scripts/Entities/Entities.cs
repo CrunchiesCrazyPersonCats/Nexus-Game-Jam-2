@@ -19,6 +19,7 @@ namespace Pictomancer
         public int _maxHealth;
         public int MaxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
         [SerializeField] protected int _attackDamage;
+        [SerializeField] protected Animator _animator;
 
         protected virtual void Start()
         {
@@ -32,11 +33,19 @@ namespace Pictomancer
                 damage /= 2;
             }
             Health -= damage;
+            if (_animator != null)
+            {
+                _animator.SetTrigger("TakeDamage");
+            }
             // TODO Elemental VFX depending on the source type
         }
 
         public virtual void Death()
         {
+            if (_animator != null)
+            {
+                _animator.SetTrigger("Death");
+            }
             Destroy(gameObject);
         }
 

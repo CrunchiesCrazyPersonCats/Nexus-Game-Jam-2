@@ -8,7 +8,8 @@ namespace Pictomancer.Elements
     {
         ElementDetection Parent;
         public int ID;
-        bool completed = false;
+        public bool completed = false;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,10 +17,26 @@ namespace Pictomancer.Elements
             Parent.MaxPoint++;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public void UpdateHitStatus()
+        {
+            if (completed) return;
+            completed = true;
+            _spriteRenderer.enabled = completed;
+            Parent.PointCompleted++;
+        }
+
+        public void SetUncomplete()
+        {
+            completed = false;
+            _spriteRenderer.enabled = completed;
+            Parent.PointCompleted--;
+        }
+
+        /*private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!completed && collision.CompareTag(Constants.TAG_MAGICQUILL))
             {
+                Debug.Log("Entered");
                 Parent.PointCompleted++;
                 completed = true;
             }
@@ -27,11 +44,12 @@ namespace Pictomancer.Elements
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            Debug.Log("Exited");
             if (collision.CompareTag(Constants.TAG_MAGICQUILL))
             {
                 Parent.PointCompleted--;
                 completed = false;
             }
-        }
+        }*/
     }
 }
