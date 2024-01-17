@@ -139,6 +139,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1767101981481957728, guid: e9949776f0d9da54b81edf4310de953f, type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1767101981481957728, guid: e9949776f0d9da54b81edf4310de953f, type: 3}
       propertyPath: m_Parameters.shadowBias
       value: 1
       objectReference: {fileID: 0}
