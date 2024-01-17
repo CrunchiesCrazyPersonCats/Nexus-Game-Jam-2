@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpellObject_SO : ScriptableObject, IObject
 {
     public string _brozi;
+    public int _attackDamage;
     public GameObject _prefab;
     public Sprite _itemIcon;
     public FormObject_SO _form;

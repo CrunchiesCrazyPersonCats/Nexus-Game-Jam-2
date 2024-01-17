@@ -14,7 +14,7 @@ namespace Pictomancer
         [SerializeField] protected ElementObject_SO _element;
         public ElementObject_SO Element { get { return _element; } set { _element = value; } }
         protected int _health;
-        public int Health { get { return _health; } set { Debug.Log("Health:" + value);  if (value > MaxHealth) { _health = MaxHealth; return; } _health = value; if (value <= 0) Death(); } }
+        public int Health { get { return _health; } set { if (value > MaxHealth) { _health = MaxHealth; return; } _health = value; if (value <= 0) Death(); } }
 
         public int _maxHealth;
         public int MaxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
@@ -32,6 +32,7 @@ namespace Pictomancer
                 damage /= 2;
             }
             Health -= damage;
+            // TODO Elemental VFX depending on the source type
         }
 
         public virtual void Death()
@@ -41,6 +42,10 @@ namespace Pictomancer
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.CompareTag(gameObject.tag))
+            {
+                return;
+            }
             if (collision.gameObject.TryGetComponent(out IDamageable obj))
             {
                 obj.TakeDamage(_attackDamage, _element.ElementType);

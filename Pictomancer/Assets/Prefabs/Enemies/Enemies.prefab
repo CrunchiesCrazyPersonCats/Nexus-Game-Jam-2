@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6427212077424419459}
   m_Layer: 0
   m_Name: Enemies
-  m_TagString: Untagged
+  m_TagString: Ennemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   _lifeSpawn: 5
   _body: {fileID: -610984934476822093}
   _spriteRenderer: {fileID: 1416492258670708921}
+  WaveManagerRef: {fileID: 0}
 --- !u!50 &-610984934476822093
 Rigidbody2D:
   serializedVersion: 4
