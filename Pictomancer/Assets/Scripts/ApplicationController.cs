@@ -34,7 +34,7 @@ namespace Pictomancer
         void Start()
         {
             // Application settings
-            Application.wantsToQuit += OnWantToQuit;
+            //Application.wantsToQuit += OnWantToQuit;
             SceneManager.activeSceneChanged += OnSwitchScene;
             Application.targetFrameRate = 120;
             DontDestroyOnLoad(gameObject);
@@ -44,19 +44,36 @@ namespace Pictomancer
             SceneManager.LoadScene(Constants.HOMEPAGE_SCENE);
         }
 
+        public void quit()
+        {
+
+        }
+
         #region ApplicationReactions
-        private bool OnWantToQuit()
+        //private bool OnWantToQuit()
+        public void Quit()
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif
-            return true;
+            //return true;
         }
 
         private void OnSwitchScene(Scene current, Scene next)
         {
+            switch (current.name)
+            {
+                case Constants.HOMEPAGE_SCENE:
+                    gameCondition = GameCondition.Start;
+                    break;
+                case Constants.GAME_SCENE:
+                    gameCondition = GameCondition.OnGoing;
+                    break;
+                default:
+                    break;
+            }
         }
         #endregion
     }
