@@ -723,6 +723,7 @@ MonoBehaviour:
   EnemiesPrefab:
   - {fileID: 4087734656871919783, guid: 78de2c4a97836494a8d9333f5648b8f6, type: 3}
   - {fileID: 2957670566636914575, guid: b24792b9ad6ddc34292cf90aff46aeb8, type: 3}
+  enemyMaxKilledCount: 10
   _interval: 4
   _spawnStart: 1
 --- !u!61 &97518159
@@ -5941,7 +5942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6171351496537372955, guid: 9dea0abe4af845b438a8d5f33a4e5a9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6171351496537372955, guid: 9dea0abe4af845b438a8d5f33a4e5a9d, type: 3}
       propertyPath: m_LocalRotation.w
