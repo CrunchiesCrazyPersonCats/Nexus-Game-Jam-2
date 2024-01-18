@@ -11,6 +11,16 @@ public class HomePage : MonoBehaviour
         SceneManager.LoadScene(Constants.GAME_SCENE);
     }
 
+    public void Home()
+    {
+        SceneManager.LoadScene(Constants.HOMEPAGE_SCENE);
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene(Constants.CREDITS_SCENE);
+    }
+
     public void Quit()
     {
         ApplicationController.Instance.Quit();
