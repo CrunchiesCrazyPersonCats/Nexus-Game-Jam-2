@@ -29,5 +29,13 @@ namespace Pictomancer.Elements
             _magicMike.AddForm(detected._form);
             // TODO give this spell to the altar
         }
+
+        public void HardResetBoard()
+        {
+            foreach (ElementDetection detector in elementsDetector)
+            {
+                detector.ResetBoard();
+            }
+        }
     }
 }

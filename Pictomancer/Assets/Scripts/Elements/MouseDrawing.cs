@@ -48,6 +48,16 @@ namespace Pictomancer.Elements
             }
         }
 
+        public void HardResetPen()
+        {
+            int MaxIndex = transform.childCount;
+            if (MaxIndex == 0) return;
+            for (int i = MaxIndex - 1; i >= 0; i--)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+
 
         void StartLine()
         {

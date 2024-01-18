@@ -1,3 +1,4 @@
+using Pictomancer.Elements;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -11,11 +12,14 @@ public class PlayerInteractions : MonoBehaviour
     Vector2 lookDirection = Vector2.zero;
     int mask;
 
+    public MouseDrawing magicPen;
+
     private void Awake()
     {
         mask = LayerMask.GetMask(Constants.LAYER_INTERACTIBLE);
         _player = GetComponent<Player>();
-        keys.Add(KeyCode.G); // Interact Key : Grab and Put
+        keys.Add(KeyCode.F); // Interact Key : Grab and Put
+        keys.Add(KeyCode.E); // Pen Key : Reset Progress
     }
 
     private void Update()
@@ -23,7 +27,7 @@ public class PlayerInteractions : MonoBehaviour
         RaycastHit2D hit = GetInteractableObject();
         foreach (KeyCode key in keys)
         {
-            if (Input.GetKeyDown(key) && hit)
+            if (Input.GetKeyDown(key))
             {
                 HandleInteractions(key, hit);
             }
@@ -48,7 +52,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         switch (key)
         {
-            case KeyCode.G: // Grab and Pick
+            case KeyCode.F: // Grab and Pick
+                if (!hit) return;
                 if (_player.IsCarrying())
                 {
                     PutDownItem(hit);
@@ -56,6 +61,10 @@ public class PlayerInteractions : MonoBehaviour
                 {
                     GrabItem(hit);
                 }
+                break;
+            case KeyCode.E: // Reset Pen and Board
+                magicPen.HardResetPen();
+                MagiaBoard.Instance.HardResetBoard();
                 break;
             default: break;
         }
