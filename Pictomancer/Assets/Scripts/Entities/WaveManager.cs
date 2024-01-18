@@ -3,6 +3,7 @@ using Pictomancer.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class WaveManager : MonoBehaviour
     private Transform[] _spawner;
     public List<EnemieController> EnnemiesList {  get; private set; }
 
+    public int enemyMaxKilledCount = 10;
+    private int _enemySpawned = 0;
     private int _spawnerCount;
     private int _ennemyTypeCount;
     [SerializeField] private int _interval;
@@ -46,6 +49,11 @@ public class WaveManager : MonoBehaviour
                 Debug.Log(t.Health);
             }
         }
+
+        if (_enemySpawned == enemyMaxKilledCount)
+        {
+            SceneManager.LoadScene(Constants.WINSCREEN_SCENE);
+        }
     }
     public void StartSpawning()
     {
@@ -60,6 +68,7 @@ public class WaveManager : MonoBehaviour
     public void Spawn()
     {
         Instantiate(EnemiesPrefab[Random.Range(0, _ennemyTypeCount)], _spawner[Random.Range(0, _spawnerCount)].position, Quaternion.identity);
+        ++_enemySpawned;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

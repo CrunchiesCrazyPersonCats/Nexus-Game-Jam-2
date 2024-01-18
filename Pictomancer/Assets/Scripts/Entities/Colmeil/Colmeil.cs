@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Colmeil : MonoBehaviour
@@ -32,6 +33,8 @@ public class Colmeil : MonoBehaviour
     [SerializeField] float _reCastSpeed;
     float _nextShot = 0.0f;
 
+    public Pictomancer.Entities colmeilLife;
+
     private void Start()
     {
         _spellLine.SetPosition(0, _spellStartPoint.position);
@@ -60,6 +63,11 @@ public class Colmeil : MonoBehaviour
                 _nextShot = Time.time;
                 //AttackClosestEnemies();
             }
+        }
+
+        if (colmeilLife.Health <= 0)
+        {
+            SceneManager.LoadScene(Constants.LOSESCREEN_SCENE);
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && _waveManager.EnnemiesList.Count > 0)

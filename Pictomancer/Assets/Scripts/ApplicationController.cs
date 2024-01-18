@@ -44,11 +44,6 @@ namespace Pictomancer
             SceneManager.LoadScene(Constants.HOMEPAGE_SCENE);
         }
 
-        public void quit()
-        {
-
-        }
-
         #region ApplicationReactions
         //private bool OnWantToQuit()
         public void Quit()
@@ -70,6 +65,12 @@ namespace Pictomancer
                     break;
                 case Constants.GAME_SCENE:
                     gameCondition = GameCondition.OnGoing;
+                    break;
+                case Constants.WINSCREEN_SCENE:
+                    gameCondition = GameCondition.Won;
+                    break;
+                case Constants.LOSESCREEN_SCENE:
+                    gameCondition = GameCondition.Lost;
                     break;
                 default:
                     break;
